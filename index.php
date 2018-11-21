@@ -1,4 +1,4 @@
-<?php include_once('config.inc.php') or die ("Konfigurationsdatei fehlt!"); ?>
+<?php if(!file_exists('config.inc.php')) die('Konfigurationsdatei nicht gefunden!'); include_once('config.inc.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
