@@ -42,7 +42,7 @@ $username hat das Ticket geschlossen";
 
 file_put_contents('tmp/lastmail.log',$lastmail);
 
-//file_put_contents('tmp/last.txt',file_get_contents('php://input'));
+file_put_contents('tmp/lasthook.txt',file_get_contents('php://input'));
 
 
 //[TICKET] '.$id
