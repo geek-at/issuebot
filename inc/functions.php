@@ -29,8 +29,9 @@ function sendMail($rcpt,$subject,$mailfrom,$text)
     $mail->Port       = EMAIL_SMTP_PORT;                                    // TCP port to connect to
 
     //Recipients
+    $noreply = 'noreply@'.substr(EMAIL_ALTERNATIVE,strpos(EMAIL_ALTERNATIVE,'@')+1);
     $mail->addReplyTo($mailfrom);
-    $mail->SetFrom('noreply@parhamer.at');
+    $mail->SetFrom($noreply);
     if(strpos($rcpt,',')!==false)
         $rcpt = explode(',',$rcpt);
     if(is_array($rcpt))

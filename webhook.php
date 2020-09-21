@@ -31,7 +31,7 @@ Ticket wurde wieder geöffnet";
 
     case 'closed':
         $etext = "Ticket $issue - $issueurl
-Ticket wurde geschlossen geschlossen";
+Ticket wurde geschlossen";
         $lastmail = sendMail(EMAIL_TO,'[TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
     break;
 
