@@ -36,6 +36,7 @@ $username hat das Ticket geschlossen";
     break;
 
     default:
+        file_put_contents('tmp/lastfail.txt',file_get_contents('php://input'));
         exit('');
 }
 
