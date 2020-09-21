@@ -9,12 +9,12 @@ $data = json_decode(file_get_contents('php://input'),true);
 
 $action = $data['action'];
 $issue = $data['issue']['id'];
-$username = $data['issue']['user']['username'];
 $issueurl='http://'.GIT_DOM.'/'.GIT_USER.'/'.GIT_REPO.'/issues/'.$issue;
 
 switch($action)
 {
     case 'created': //comment
+        $username = $data['comment']['user']['username'];
         $comment = $data['comment']['body'];
         $etext = "Ticket $issue - $issueurl
 $username hat folgendes kommentiert:
@@ -25,13 +25,13 @@ $comment";
 
     case 'reopened':
         $etext = "Ticket $issue - $issueurl
-$username hat das Ticket wiedereröffnet";
+Ticket wurde wieder geöffnet";
         $lastmail = sendMail(EMAIL_TO,'Re: [TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
     break;
 
     case 'closed':
         $etext = "Ticket $issue - $issueurl
-$username hat das Ticket geschlossen";
+Ticket wurde geschlossen geschlossen";
         $lastmail = sendMail(EMAIL_TO,'Re: [TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
     break;
 
