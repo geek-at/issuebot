@@ -91,7 +91,8 @@
 Nachricht:
 $text";
 
-                        sendMail(EMAIL_TO,'[TICKET] '.$id,$email,$etext);
+                        $lastmail = sendMail(EMAIL_TO,'[TICKET] '.$id,$email,$etext);
+                        file_put_contents('tmp/lastmail.log',$lastmail);
                     }
                 }
                 else
