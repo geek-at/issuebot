@@ -68,6 +68,7 @@
 
                 $context  = stream_context_create($options);
                 $result = file_get_contents($url, false, $context);
+                file_put_contents('tmp/lastissueresponse.log',$result);
                 if($result!==false)
                 {
                   $json = json_decode($result,true);
