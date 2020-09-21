@@ -8,7 +8,7 @@ define('ROOT', dirname(__FILE__));
 $data = json_decode(file_get_contents('php://input'),true);
 
 $action = $data['action'];
-$issue = $data['issue']['name'];
+$issue = $data['issue']['number'];
 $issueurl='http://'.GIT_DOM.'/'.GIT_USER.'/'.GIT_REPO.'/issues/'.$issue;
 
 switch($action)
