@@ -29,9 +29,10 @@ function sendMail($rcpt,$subject,$mailfrom,$text)
     $mail->Port       = EMAIL_SMTP_PORT;                                    // TCP port to connect to
 
     //Recipients
+    $mail->addReplyTo($mailfrom);
+    $mail->SetFrom('noreply@parhamer.at');
     if(strpos($rcpt,',')!==false)
         $rcpt = explode(',',$rcpt);
-    $mail->setFrom($mailfrom);
     if(is_array($rcpt))
         foreach($rcpt as $add)
             $mail->addAddress($add);
