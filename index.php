@@ -53,7 +53,7 @@
             }
             else
             {
-                $url = 'http://'.GIT_DOM.'/api/v1/repos/'.GIT_USER.'/'.GIT_REPO.'/issues?token='.GIT_TOKEN;
+                $url = 'https://'.GIT_DOM.'/api/v1/repos/'.GIT_USER.'/'.GIT_REPO.'/issues?token='.GIT_TOKEN;
                 touch('tmp/'.$bgid);
                 $body = "**Name:** $name\n- **Email:** $email\n- **IP:** ".getUserIP()."\n## Nachricht:\n$text";
 
@@ -73,7 +73,7 @@
                 {
                   $json = json_decode($result,true);
                   $id = $json['id'];
-                  $issueurl='http://'.GIT_DOM.'/'.GIT_USER.'/'.GIT_REPO.'/issues/'.$id;
+                  $issueurl='https://'.GIT_DOM.'/'.GIT_USER.'/'.GIT_REPO.'/issues/'.$id;
                     echo '<div class="alert alert-success">
                             <strong>Nachricht übermittelt!</strong> Ihre Nachricht wurde erfolgreich übermittelt
                             <h5>Ihre Ticket ID Lautet '.$id.'</h5>
