@@ -22,7 +22,10 @@ function sendMail($rcpt,$subject,$mailfrom,$text)
     if(defined('EMAIL_SMTP_SECURE') && EMAIL_SMTP_SECURE===true)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
     else
+    {
         $mail->SMTPSecure = false;
+        $mail->SMTPAutoTLS = false;
+    }
     $mail->Port       = EMAIL_SMTP_PORT;                                    // TCP port to connect to
 
     //Recipients
