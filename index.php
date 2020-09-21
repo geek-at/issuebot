@@ -72,7 +72,7 @@
                 if($result!==false)
                 {
                   $json = json_decode($result,true);
-                  $id = $json['id'];
+                  $id = $json['number'];
                   $issueurl='https://'.GIT_DOM.'/'.GIT_USER.'/'.GIT_REPO.'/issues/'.$id;
                     echo '<div class="alert alert-success">
                             <strong>Nachricht übermittelt!</strong> Ihre Nachricht wurde erfolgreich übermittelt
