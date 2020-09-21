@@ -20,19 +20,19 @@ switch($action)
 $username hat folgendes kommentiert:
 
 $comment";
-        $lastmail = sendMail(EMAIL_TO,'Re: [TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
+        $lastmail = sendMail(EMAIL_TO,'[TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
     break;
 
     case 'reopened':
         $etext = "Ticket $issue - $issueurl
 Ticket wurde wieder geöffnet";
-        $lastmail = sendMail(EMAIL_TO,'Re: [TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
+        $lastmail = sendMail(EMAIL_TO,'[TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
     break;
 
     case 'closed':
         $etext = "Ticket $issue - $issueurl
 Ticket wurde geschlossen geschlossen";
-        $lastmail = sendMail(EMAIL_TO,'Re: [TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
+        $lastmail = sendMail(EMAIL_TO,'[TICKET] '.$issue,EMAIL_ALTERNATIVE,$etext);
     break;
 
     default:
