@@ -150,7 +150,7 @@ $text\n".($imagemarkdown?"## Fotos/Screenshots:\n$imagemarkdown":'');
 
             <input type="hidden" name="bgid" value="<?php echo gen_uuid(); ?>" />
 
-            <input type="submit" name="submit" id="btn_submit" class="btn btn-success" value="Meldung absenden" />
+            <input type="submit" name="submit" id="submit" class="btn btn-success" value="Meldung absenden" />
         </form>
 
 
@@ -173,7 +173,8 @@ $text\n".($imagemarkdown?"## Fotos/Screenshots:\n$imagemarkdown":'');
 
 	<script>
 		function onSubmit() {
-			$('#btn_submit').attr('disabled', true);
+			$('#submit').attr('disabled', true);
+      return true;
 		}
 	</script>
   </body>
