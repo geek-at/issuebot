@@ -34,7 +34,7 @@
 
         <?php 
         
-        if($_REQUEST['submit'])
+        if($_REQUEST['bgid'])
         {
             $name = trim($_REQUEST['name']);
             $email = trim($_REQUEST['email']);
