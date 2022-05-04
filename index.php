@@ -52,7 +52,7 @@
 					if($data['status']=='ok')
 					{
 						$uploadedimages[] = $data['url'];
-						$imagemarkdown.="\n![](".$data['url'].")";
+						$imagemarkdown.="\n[![](".$data['url']."/1024)](".$data['url'].")";
 					}	
 				}
 
