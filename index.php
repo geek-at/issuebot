@@ -39,6 +39,23 @@
             $name = trim($_REQUEST['name']);
             $email = trim($_REQUEST['email']);
             $text = trim($_REQUEST['text']);
+            $files = $_FILES;
+			$uploadedimages = [];
+			$imagemarkdown = "";
+
+			//var_dump($files);
+
+			if($files)
+				foreach($files['pictures']['tmp_name'] as $tmpname)
+				{
+					$data = pictshareUploadImage($tmpname);
+					if($data['status']=='ok')
+					{
+						$uploadedimages[] = $data['url'];
+						$imagemarkdown.="\n![](".$data['url'].")";
+					}	
+				}
+
             $bgid = preg_replace("/[^a-zA-Z0-9]+/", "", $_REQUEST['bgid']);
 
 
@@ -55,7 +72,7 @@
             {
                 $url = 'https://'.GIT_DOM.'/api/v1/repos/'.GIT_USER.'/'.GIT_REPO.'/issues?token='.GIT_TOKEN;
                 touch('tmp/'.$bgid);
-                $body = "**Name:** $name\n- **Email:** $email\n- **IP:** ".getUserIP()."\n## Nachricht:\n$text";
+                $body = "**Name:** $name\n- **Email:** $email\n- **IP:** ".getUserIP()."\n## Nachricht:\n$text\n".($imagemarkdown?"Fotos/Screenshots:\n$imagemarkdown":'');
 
                 $data = array('title' => 'Meldung von '.$name.' ('.$email.')', 'body' => $body);
                 $options = array(
@@ -88,8 +105,8 @@
 - IP: ".getUserIP()."
 - Ticket URL: $issueurl
 
-Nachricht:
-$text";
+## Nachricht:
+$text\n".($imagemarkdown?"## Fotos/Screenshots:\n$imagemarkdown":'');
 
                         $lastmail = sendMail(EMAIL_TO,'[TICKET] '.$id,$email,$etext);
                         file_put_contents('tmp/lastmail.log',$lastmail);
@@ -107,7 +124,7 @@ $text";
     ?>
 
         <h1>Problem / Wunsch melden</h1>
-        <form method="POST" action="?" class="form" role="form">
+        <form method="POST" action="?" enctype="multipart/form-data" class="form" role="form">
             <div class="form-group">
                 <strong>Ihr Name</strong>
               <input autocomplete="off" name="name" type="text" placeholder="" class="form-control">
@@ -121,6 +138,15 @@ $text";
             <strong>Ihre Nachricht</strong>
               <textarea name="text" class="form-control" rows="5"></textarea>
             </div>
+
+            <div class="form-group">
+              <span class="control-fileupload">
+                <label for="fileInput">(optional) Fotos/Screenshots anhängen</label>
+                <input type="file" name="pictures[]" multiple id="fileInput">
+              </span>
+            </div>
+
+            
 
             <input type="hidden" name="bgid" value="<?php echo gen_uuid(); ?>" />
 

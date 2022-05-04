@@ -3,6 +3,8 @@
 function sendMail($rcpt,$subject,$mailfrom,$text)
 {
     require_once(ROOT.DS.'inc'.DS.'PHPMailer.php');
+    require_once(ROOT.DS.'inc'.DS.'Parsedown.php');
+    $p = new Parsedown;
     $mail = new PHPMailer();
 
     ob_start();
@@ -40,10 +42,20 @@ function sendMail($rcpt,$subject,$mailfrom,$text)
     else
         $mail->addAddress($rcpt);     // Add a recipient
 
+    if(defined('SMTP_EHLO_DOMAIN') && SMTP_EHLO_DOMAIN)
+        $mail->Hostname = SMTP_EHLO_DOMAIN;
+    
+    $mail->SMTPOptions = [
+        'socket' => [
+            'bindto' => "0:0",
+        ],
+    ];
+
     // Content
-    $mail->isHTML(false);                                  // Set email format to HTML
+    $mail->isHTML(true);
     $mail->Subject = $subject;
-    $mail->Body    = $text;
+    $mail->Body    = $p->text($text);
+    $mail->AltBody = $text;
 
     $mail->send();
 
@@ -98,4 +110,32 @@ function gen_uuid() {
       // 48 bits for "node"
       mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
   );
+}
+
+/*
+* @param $path string Path to the file that should be uploaded
+* @param $hash string Optional. File name we want on pictshare for the file
+*/
+function pictshareUploadImage($path,$hash=false)
+{
+    if(!file_exists($path)) return false;
+    $request = curl_init('https://pictshare.net/api/upload.php');
+    
+    curl_setopt($request, CURLOPT_POST, true);
+    curl_setopt(
+        $request,
+        CURLOPT_POSTFIELDS,
+        array(
+        'file' => curl_file_create($path),
+        'hash'=>$hash
+        ));
+
+    // output the response
+    curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+    $json = json_decode(curl_exec($request).PHP_EOL,true);
+
+    // close the session
+    curl_close($request);
+
+    return $json;
 }
