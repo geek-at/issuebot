@@ -174,7 +174,6 @@ $text\n".($imagemarkdown?"## Fotos/Screenshots:\n$imagemarkdown":'');
 	<script>
 		function onSubmit() {
 			$('#btn_submit').attr('disabled', true);
-			$('#btn_submit').attr('values', "Bitte warten..");
 		}
 	</script>
   </body>
