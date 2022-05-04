@@ -124,7 +124,7 @@ $text\n".($imagemarkdown?"## Fotos/Screenshots:\n$imagemarkdown":'');
     ?>
 
         <h1>Problem / Wunsch melden</h1>
-        <form method="POST" action="?" enctype="multipart/form-data" class="form" role="form">
+        <form onsubmit="onSubmit()" method="POST" action="?" enctype="multipart/form-data" class="form" role="form">
             <div class="form-group">
                 <strong>Ihr Name</strong>
               <input autocomplete="off" name="name" type="text" placeholder="" class="form-control">
@@ -150,7 +150,7 @@ $text\n".($imagemarkdown?"## Fotos/Screenshots:\n$imagemarkdown":'');
 
             <input type="hidden" name="bgid" value="<?php echo gen_uuid(); ?>" />
 
-            <input type="submit" name="submit" class="btn btn-success" value="Meldung absenden" />
+            <input type="submit" name="submit" id="btn_submit" class="btn btn-success" value="Meldung absenden" />
         </form>
 
 
@@ -170,6 +170,13 @@ $text\n".($imagemarkdown?"## Fotos/Screenshots:\n$imagemarkdown":'');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+	<script>
+		function onSubmit() {
+			$('.btn_submit').attr('disabled', true);
+			$('.btn_submit').attr('values', "Bitte warten..");
+		}
+	</script>
   </body>
 </html>
 <?php
