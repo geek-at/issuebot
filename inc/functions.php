@@ -9,6 +9,7 @@ function sendMail($rcpt,$subject,$mailfrom,$text)
 
     ob_start();
 
+    $mail->CharSet   = 'UTF-8';
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
     $mail->Host       = EMAIL_SMTP_HOST;                    // Set the SMTP server to send through
